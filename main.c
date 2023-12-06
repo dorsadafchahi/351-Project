@@ -4,9 +4,10 @@
 //  Nicholas H, Dorsa A, Lester P, Jim P
 //
 //  Description: Water pollution detection
-//  Will use 2 turbidity sensors to detect the amount of pollution in water, 
+//  Will use 2 turbidity sensors to detect the amount of pollution in 2 water samples (before and after filter), 
 //  and then display that amount on an LED
 //  will use modules, threads and Gpio/I2c access to the beaglebone
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -28,6 +29,7 @@ int main(){
     //pthread_create(&thread1, NULL, &Sampler_startSampling, NULL);
 
     //Run thread 2 to gather data from the second sensor
+    //pthread_create(&thread2, NULL, &Sampler_startSampling, NULL);
 
 
 
