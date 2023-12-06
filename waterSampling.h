@@ -19,7 +19,7 @@
 double sampleInVolts(file WATERSENSOR);
 
 // Begin/end the background thread which samples water pollution levels.
-void *waterSampler();
+void *waterSampler_start();
 void Sampler_stopSampling();
 
 //thead function to run in tandem with start sampling, that, with the help of mutexes, will analyze the array after it is filled

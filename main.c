@@ -26,7 +26,7 @@ int main(){
     printf("Starting Water Analysis\n");
     
     //Run thread 1 to gather data from the first sensor
-    //pthread_create(&thread1, NULL, &Sampler_startSampling, NULL);
+    //pthread_create(&thread1, NULL, &waterSampler_start, NULL);
 
     //Run thread 2 to gather data from the second sensor
     //pthread_create(&thread2, NULL, &Sampler_startSampling, NULL);

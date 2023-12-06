@@ -16,7 +16,7 @@ double sampleInVolts(FILE WATERSENSOR)
     return val;
 }
 
-void *waterSampler()
+void *waterSampler_start()
 {
     // initialize array
     buffer_index = 0;
