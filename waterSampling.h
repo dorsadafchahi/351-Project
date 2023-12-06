@@ -13,14 +13,13 @@
 #include "LEDmatrix.h"
 
 #define WATERSENSOR1 "/sys/bus/iio/devices/iio:device0/in_voltage1_raw"
-//#define WATERSENSOR2 "/sys/bus/iio/devices/iio:device0/in_voltage2_raw"??
+#define WATERSENSOR2 "/sys/bus/iio/devices/iio:device0/in_voltage2_raw"
 
 //function to get voltage reading from water sensor
-double sampleInVolts(file WATERSENSOR);
+double sampleInVolts(int SensorNum);
 
 // Begin/end the background thread which samples water pollution levels.
-void *waterSampler_start();
-void Sampler_stopSampling();
+void *waterSampler_start(int SensorNum);
 
 //thead function to run in tandem with start sampling, that, with the help of mutexes, will analyze the array after it is filled
 void *Sampler_startAnalysis();

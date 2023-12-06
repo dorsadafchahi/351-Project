@@ -6,12 +6,13 @@
 #include <stdbool.h>
 
 // Get current time function
-long long getTimeInMicroS(void);
+static long long getTimeInMs(void);
 
 // Add delay (in number of milliseconds)
 void sleepForMs(long long delayInMs);
 
-// Convert Microseconds to milliseconds
-double displayMicroToMs(long long val);
+//given function to run a command on terminal
+//given function to run a linux command in C
+static void runCommand(char* command);
 
 #endif

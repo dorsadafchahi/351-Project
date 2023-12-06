@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "watersampling.h": "c"
+        "watersampling.h": "c",
+        "time.h": "c"
     }
 }

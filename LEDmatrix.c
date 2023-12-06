@@ -76,7 +76,7 @@ char *intToBinary(int number){
     return NULL;
 }
 
-void displayInt(int number){
+void displayPercentage(int number){
     int i2cFileDesc = initI2cBus(I2CDRV_LINUX_BUS1, I2C_DEVICE_ADDRESS);
 
     unsigned char LEDdisplay[8];
@@ -114,50 +114,6 @@ void displayInt(int number){
         LEDdisplay[i] = bothnums;
     }
     LEDdisplay[7] = 0;
-    writeI2cReg(i2cFileDesc, 0x00, LEDdisplay); 
-
-    close(i2cFileDesc); 
-}
-
-void displayDouble(double number) {
-    int i2cFileDesc = initI2cBus(I2CDRV_LINUX_BUS1, I2C_DEVICE_ADDRESS);
-    
-    unsigned char LEDdisplay[8];
-    int num1;
-    int num2;
-
-    int number10 = number * 10;
-        //single digit number (eg 07, 09, 00)
-    if (number10 < 10){
-        num1 = 0;
-        //check if number is equal or lower than 0
-        if (number10 <= 0){
-            num2 = 0;
-        }
-        else{
-            num2 = number10 % 10; //found on stack overflow
-        }
-    }
-    //double digit number (eg 10, 48, 92)
-    else if (number10 <= 99){
-        num1 = (number10 / 10) % 10;
-        num2 = number10 % 10;
-    }
-    //if number is bigger than 99, then set number to 99
-    else if (number10 > 99){
-        num1 = 9;
-        num2 = 9;
-    }
-
-    //convert the num1 and num2 to binary for LED display described at top of file
-    char *number1 = intToBinary(num1);
-    char *number2 = intToBinary(num2);
-
-    for (int i = 0; i < 8; i++){
-        char bothnums = (number2[i] << 4) + number1[i];
-        LEDdisplay[i] = bothnums;
-    }
-    LEDdisplay[7] = 8;
     writeI2cReg(i2cFileDesc, 0x00, LEDdisplay); 
 
     close(i2cFileDesc); 
