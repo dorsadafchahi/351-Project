@@ -33,12 +33,14 @@ int main(){
         
     })
     //Run thread 1 to gather data from the first sensor, and display average cleanliness on LED1 (%)
-    // pthread_create(&thread1, NULL, &waterSampler_start, 1);
+    pthread_create(&thread1, NULL, &waterSampler_start, 1);
 
     // //Run thread 2 to gather data from the second sensor, and display average cleanliness on LED2 (%)
-    // pthread_create(&thread2, NULL, &waterSampler_start, 2);
+    pthread_create(&thread2, NULL, &waterSampler_start, 2);
 
-
+    //now both arrays are filled, and need to display percentage of pollution in each %100?
+    pthread_join(thread1, NULL);
+    pthread_join(thread2, NULL);
 
     return 0;
 }test
