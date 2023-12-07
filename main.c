@@ -28,10 +28,10 @@ int main(){
 
     printf("Starting Water Analysis\n");
     
-    for (int i = 0; i < 1000; i++{
-        printf("A2D value: %f\n", sampleInVolts(1));
+    // for (int i = 0; i < 1000; i++{
+    //     printf("A2D value: %f\n", sampleInVolts(1));
         
-    })
+    // })
     //Run thread 1 to gather data from the first sensor and place it into array
     pthread_create(&thread1, NULL, &waterSampler_start, 1);
 

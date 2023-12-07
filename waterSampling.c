@@ -44,13 +44,13 @@ void *waterSampler_start(int SensorNum)
         value = sampleInVolts(SensorNum);//sample from which sensor
 
         // store values in the array based on which watersensor file
-        waterValues[SensorNum][buffernum[SensorNum]] = value;
-        buffernum[SensorNum]++;
+        waterValues[SensorNum-1][buffernum[SensorNum-1]] = value;
+        buffernum[SensorNum-1]++;
         sleepForMs(10);
     }
-    printf("done sampling, total of %d samples collected\n", buffernum[SensorNum]);
+    printf("done sampling, total of %d samples collected\n", buffernum[SensorNum-1]);
 
-    int percentage = calculatePercentagePollution(SensorNum, buffernum[SensorNum])
+    int percentage = calculatePercentagePollution(SensorNum, buffernum[SensorNum-1])
 
     printf("displaying percentage...\n");
     displayPercentage(percentage);
@@ -61,10 +61,10 @@ int calculatePercentagePollution(int SensorNum, int num_array){
     //after sampling for 5 seconds, do analysis on percentage pollution within the samples
     //and display that on the relevant LED
     double total;
-    for (int i = 0; i < buffernum[SensorNum]; i++){
-        total = waterValues[SensorNum][i] + total;
+    for (int i = 0; i < buffernum[SensorNum-1]; i++){
+        total = waterValues[SensorNum-1][i] + total;
     }
-    double average = total / buffernum[SensorNum];
+    double average = total / buffernum[SensorNum-1];
  
     //do a calculation here to find percentage... %100 = TOTALLY DIRTY, %0 = CLEANEST WATER ON EARTH
     //we are expecting a value from 0 - 3300 around ~
