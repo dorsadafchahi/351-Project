@@ -12,6 +12,9 @@ char eight[] =  {7, 5, 5, 7, 5, 5, 7};
 char nine[] =   {7, 5, 5, 7, 4, 4, 4};
 char decimal =  8;
 
+char smile[] = {0,0,18,0,33,33,30,0};
+
+
 int initI2cBus(char* bus, int address) 
 { 
     int i2cFileDesc = open(bus, O_RDWR); 
