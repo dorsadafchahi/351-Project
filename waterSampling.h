@@ -12,8 +12,8 @@
 #include "time.h"
 #include "LEDmatrix.h"
 
-#define WATERSENSOR1 "/sys/bus/iio/devices/iio:device0/in_voltage1_raw"
-#define WATERSENSOR2 "/sys/bus/iio/devices/iio:device0/in_voltage2_raw"
+#define WATERSENSOR1 "/sys/bus/iio/devices/iio:device0/in_voltage5_raw"
+#define WATERSENSOR2 "/sys/bus/iio/devices/iio:device0/in_voltage6_raw"
 
 //function to get voltage reading from water sensor
 double sampleInVolts(int SensorNum);

@@ -2,6 +2,7 @@
     "files.associations": {
         "watersampling.h": "c",
         "time.h": "c",
-        "ledmatrix.h": "c"
+        "ledmatrix.h": "c",
+        "pthread.h": "c"
     }
 }
