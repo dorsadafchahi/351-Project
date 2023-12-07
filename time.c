@@ -1,7 +1,7 @@
 #include "time.h"
 
 //given function to get current time in MS
-static long long getTimeInMs(void) {
+long long getTimeInMs(void) {
     struct timespec spec;
     clock_gettime(CLOCK_REALTIME, &spec);
     long long seconds = spec.tv_sec;
@@ -11,7 +11,7 @@ static long long getTimeInMs(void) {
 }
 
 //given function to delay time in MS
-static void sleepForMs(long long delayInMs) {
+void sleepForMs(long long delayInMs) {
     const long long NS_PER_MS = 1000 * 1000;
     const long long NS_PER_SECOND = 1000000000;
     long long delayNs = delayInMs * NS_PER_MS;
@@ -22,7 +22,7 @@ static void sleepForMs(long long delayInMs) {
 }
 
 //given function to run a linux command in C
-static void runCommand(char* command) {    
+void runCommand(char* command) {    
     // Execute the shell command (output into pipe)    
     FILE *pipe = popen(command, "r");    
     // Ignore output of the command; but consume it     

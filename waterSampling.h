@@ -19,12 +19,9 @@
 double sampleInVolts(int SensorNum);
 
 // Begin/end the background thread which samples water pollution levels.
-void *waterSampler_start(int SensorNum);
+void *waterSampler_start(void *SensorNumber);
 
-//thead function to run in tandem with start sampling, that, with the help of mutexes, will analyze the array after it is filled
-void *Sampler_startAnalysis();
-
-//convert the 4095 number to voltage
-double convertToVoltage(double number);
+// function to calculate the percentage of cleanliness in the water Samples, 0 = not clean, 100 = totally clean
+int calculatePercentagePollution(int SensorNum, int num_array);
 
 #endif
