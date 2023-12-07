@@ -73,9 +73,11 @@ void *waterSampler_start(int SensorNum)
         }
         double average = total / buffernum2;
     }
-    //do a calculation here to find percentage... %100 = TOTALLY DIRTY, %0 = CLEANEST WATER ON EARTH
     
-    return NULL;
+    //do a calculation here to find percentage... %100 = TOTALLY DIRTY, %0 = CLEANEST WATER ON EARTH
+    //we are expecting a value from 0 - 3300 around ~
+
+    return NULL;-
 }
 
 // convert voltage number 4095 to volts (1.4V eg)
