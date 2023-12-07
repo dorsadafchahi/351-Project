@@ -24,7 +24,4 @@ void *waterSampler_start(int SensorNum);
 //thead function to run in tandem with start sampling, that, with the help of mutexes, will analyze the array after it is filled
 void *Sampler_startAnalysis();
 
-//convert the 4095 number to voltage
-double convertToVoltage(double number);
-
 #endif

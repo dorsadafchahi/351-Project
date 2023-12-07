@@ -21,10 +21,10 @@ pthread_t thread2;
 int main(){
 
     //Initialize matrix for numbers
-    // runCommand("config-pin P9_18 i2c");
-    // runCommand("config-pin P9_17 i2c");
-    // runCommand("i2cset -y 1 0x70 0x21 0x00");
-    // runCommand("i2cset -y 1 0x70 0x81 0x00");
+    runCommand("config-pin P9_18 i2c");
+    runCommand("config-pin P9_17 i2c");
+    runCommand("i2cset -y 1 0x70 0x21 0x00");
+    runCommand("i2cset -y 1 0x70 0x81 0x00");
 
     printf("Starting Water Analysis\n");
     

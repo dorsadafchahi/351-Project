@@ -79,10 +79,3 @@ void *waterSampler_start(int SensorNum)
 
     return NULL;-
 }
-
-// convert voltage number 4095 to volts (1.4V eg)
-double convertToVoltage(double number)
-{
-    double voltage = (number / 4095) * 1.8;
-    return voltage;
-}
