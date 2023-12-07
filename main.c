@@ -21,18 +21,19 @@ pthread_t thread2;
 int main(){
 
     //Initialize matrix for numbers
-    runCommand("config-pin P9_18 i2c");
-    runCommand("config-pin P9_17 i2c");
-    runCommand("i2cset -y 1 0x70 0x21 0x00");
-    runCommand("i2cset -y 1 0x70 0x81 0x00");
+    // runCommand("config-pin P9_18 i2c");
+    // runCommand("config-pin P9_17 i2c");
+    // runCommand("i2cset -y 1 0x70 0x21 0x00");
+    // runCommand("i2cset -y 1 0x70 0x81 0x00");
 
     printf("Starting Water Analysis\n");
     
+    
     //Run thread 1 to gather data from the first sensor, and display average cleanliness on LED1 (%)
-    pthread_create(&thread1, NULL, &waterSampler_start, 1);
+    // pthread_create(&thread1, NULL, &waterSampler_start, 1);
 
-    //Run thread 2 to gather data from the second sensor, and display average cleanliness on LED2 (%)
-    pthread_create(&thread2, NULL, &waterSampler_start, 2);
+    // //Run thread 2 to gather data from the second sensor, and display average cleanliness on LED2 (%)
+    // pthread_create(&thread2, NULL, &waterSampler_start, 2);
 
 
 
