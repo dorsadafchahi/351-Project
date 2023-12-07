@@ -1,20 +1,15 @@
 # Define the common flags and compiler
 CC = arm-linux-gnueabihf-gcc
-CFLAGS = -Wall -g -std=c99 -D _POSIX_C_SOURCE=200809L -Werror
+CFLAGS = -Wall -g -std=c99 -D _POSIX_C_SOURCE=200809L -Werror -Wno-unused-variable
 
 # Target for light_sampler
-light_sampler: light_sampler.c sampler.c button.c joystick.c time.c LEDmatrix.c
-	$(CC) $(CFLAGS) light_sampler.c sampler.c button.c joystick.c time.c LEDmatrix.c -o light_sampler -lpthread
-	cp light_sampler ~/cmpt433/public/myApps/
-
-# Target for noworky
-noworky: noworky.c
-	gcc $(CFLAGS) -Wshadow noworky.c -o noworky
-	cp noworky $(HOME)/cmpt433/public/myApps/
+light_sampler: main.c waterSampling.c LEDmatrix.c time.c
+	$(CC) $(CFLAGS) main.c waterSampling.c LEDmatrix.c time.c -o main -lpthread
+	cp main ~/ensc351/public/myApps/
 
 .PHONY: all clean
 
-all: light_sampler noworky
+all: main
 
 clean:
-	rm -f light_sampler noworky
+	rm -f main
