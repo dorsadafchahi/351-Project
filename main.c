@@ -21,13 +21,14 @@ pthread_t thread2;
 int main(){
 
     //Initialize matrix for numbers
-    runCommand("config-pin P9_18 i2c");
-    runCommand("config-pin P9_17 i2c");
-    runCommand("i2cset -y 1 0x70 0x21 0x00");
-    runCommand("i2cset -y 1 0x70 0x81 0x00");
+    // runCommand("config-pin P9_18 i2c");
+    // runCommand("config-pin P9_17 i2c");
+    // runCommand("i2cset -y 1 0x70 0x21 0x00");
+    // runCommand("i2cset -y 1 0x70 0x81 0x00");
 
     printf("Starting Water Analysis\n");
     
+
     // for (int i = 0; i < 1000; i++{
     //     printf("A2D value: %f\n", sampleInVolts(1));
         
@@ -37,6 +38,7 @@ int main(){
 
     // //Run thread 2 to gather data from the second sensor and place it into array
     pthread_create(&thread2, NULL, &waterSampler_start, (void *)2);
+
 
     //now both arrays are filled, and need to display percentage of pollution in each %100?
     //done in the thread functions
