@@ -1,8 +1,9 @@
 {
-    "files.associations": {
-        "watersampling.h": "c",
-        "time.h": "c",
-        "ledmatrix.h": "c",
-        "pthread.h": "c"
-    }
+  "files.associations": {
+    "watersampling.h": "c",
+    "time.h": "c",
+    "ledmatrix.h": "c",
+    "pthread.h": "c"
+  },
+  "C_Cpp_Runner.msvcBatchPath": ""
 }
