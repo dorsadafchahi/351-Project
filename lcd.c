@@ -1,35 +1,7 @@
-/* 16x2 LCD Initialization C Sample Code */
-/* Use freely to test wiring and derive your own LCD code. */
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdint.h>
-#include <unistd.h>
-#include <time.h>
-#include <string.h>
+#include "lcd.h"
 #include "gpio.h"
 
-// nanosleep wrapper function - accepts seconds and nanoseconds to construct delay
-static void delayFor(int, int);
-// Flash the E pin high to low to have the LCD consume the data
-static void pulseEnable();
-// Write 4 bits to their corresponding pin (D4, D5, D6, D7)
-static void write4Bits(uint8_t);
-// Write a char to the LCD
-static void writeChar(char);
-// Write a message to the LCD
-static void writeMessage(char* msg);
-// Initialize the LCD
-static void initializeLCD();
-
-int main()
-{
-    initializeLCD();
-    writeMessage("ENSC-351 Final! Testing...");
-    return 0;
-}
-
-static void initializeLCD()
+void initializeLCD()
 {
     // Set every GPIO pin to OUTPUT
     GPIO_writeDirection(RS_GPIO_NUMBER, "out");
@@ -45,8 +17,6 @@ static void initializeLCD()
     GPIO_writeValue(D5_GPIO_NUMBER, "0");
     GPIO_writeValue(D6_GPIO_NUMBER, "0");
     GPIO_writeValue(D7_GPIO_NUMBER, "0");
-
-    printf("Configured pins...\n");
 
     // Set to command mode
     GPIO_writeValue(RS_GPIO_NUMBER, "0");
@@ -94,17 +64,14 @@ static void initializeLCD()
 	write4Bits(0xF); /* 1111 */
 	delayFor(0, 64000); // 64 us
 
-    printf("Completed initialization.\n");
-
 	// Pull RS up to write data.
 	GPIO_writeValue(RS_GPIO_NUMBER, "1");
 }
 
-void writeMessage(char* msg)
+void writeMessage(char* result)
 {
-    printf("Writing \"%s\" to LCD...\n", msg);
-    for (int i = 0; i < strlen(msg); i++) {
-        writeChar(msg[i]);
+    for (int i = 0; i < strlen(result); i++) {
+        writeChar(result[i]);
     }
 }
 
@@ -116,7 +83,7 @@ void writeChar(char c)
 	write4Bits(lower_bits);
 }
 
-static void pulseEnable() {
+void pulseEnable() {
     struct timespec pulseDelay = {0, 1000000};
     GPIO_writeValue(E_GPIO_NUMBER, "1");
     nanosleep(&pulseDelay, (struct timespec*) NULL);
@@ -124,7 +91,7 @@ static void pulseEnable() {
     nanosleep(&pulseDelay, (struct timespec*) NULL);
 }
 
-static void write4Bits(uint8_t value)
+void write4Bits(uint8_t value)
 {
     char strBit[2];
     strBit[1] = '\0'; 
@@ -143,7 +110,7 @@ static void write4Bits(uint8_t value)
 	pulseEnable();
 }
 
-static void delayFor(int s, int ns)
+void delayFor(int s, int ns)
 {
     struct timespec delay = {s, ns};
     nanosleep(&delay, (struct timespec*) NULL);
