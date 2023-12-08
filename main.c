@@ -15,6 +15,7 @@
 #include <pthread.h>
 #include "waterSampling.h"
 #include "button.h"
+#include "joystick.h"
 
 pthread_t thread1;
 pthread_t thread2;
@@ -22,8 +23,6 @@ pthread_t thread2;
 int main() {
 
     infoSens SensorOutput;
-    char result[41];
-    char result2[17];
 
     //Initialize matrix for numbers
     // runCommand("config-pin P9_18 i2c");
@@ -35,16 +34,15 @@ int main() {
     
     writetoFile("in");
     long long starttime = getTimeInMs();
-    while(getTimeInMs() < (starttime + (1000 * 60 * 3))){//this loop will run until 3 min of inactivity
+    while(getTimeInMs() < (starttime + (1000 * 60 * 3))) { //this loop will run until 3 min of inactivity
         if (getUSERvalue() == 48){//button is pressed
-            // printf("Starting Water Analysis\n");
+             // printf("Starting Water Analysis\n");
             initializeLCD();
             writeMessage("Analyzing water,                        Please wait 5s..");
-
             //Run thread 1 to gather data from the first sensor and place it into array
             pthread_create(&thread1, NULL, &waterSampler_start, (void *)1);
 
-            // //Run thread 2 to gather data from the second sensor and place it into array
+            //Run thread 2 to gather data from the second sensor and place it into array
             pthread_create(&thread2, NULL, &waterSampler_start, (void *)2);
 
             //now both arrays are filled, and need to display percentage of pollution in each %100?
@@ -55,21 +53,25 @@ int main() {
             //Display sensor information on LCD
             initializeLCD(); //clears LCD
             displayOnLCD(&SensorOutput);
-            snprintf(result, sizeof(result), "Blue:%2d  Blk:%2d                         ", SensorOutput.infoPerc2, SensorOutput.infoPerc1);
-            
-            if (SensorOutput.infoPerc2 == SensorOutput.infoPerc1) {
-                snprintf(result2, sizeof(result2), "Percentage equal");
-            } else if (SensorOutput.infoPerc2 < SensorOutput.infoPerc1) {
-                snprintf(result2, sizeof(result2), "Blue is cleaner ");
-            } else {
-                snprintf(result2, sizeof(result2), "Black is cleaner");
+            starttime = getTimeInMs(); //resets start time for use in loop
+            while(1) {
+                initializeLCD(); //clears LCD
+                joystickInfo(&SensorOutput);
+                if (getUSERvalue() == 48) {
+                    initializeLCD();
+                    break;
+                }
+                if (getTimeInMs() > (starttime + (1000 * 60 * 3))) {
+                    goto END;
+                }
             }
-            strcat(result, result2);
-            writeMessage(result);
-
+            
             //reset the start time to count from now
             starttime = getTimeInMs();
         }
     }
+END:
+    initializeLCD(); //clears LCD
+    writeMessage("Goodbye!");
     return 0;
 }

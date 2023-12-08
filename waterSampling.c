@@ -8,6 +8,8 @@ int SensorVal1 = 0;
 int SensorVal2 = 0;
 int PercentVal1 = 0;
 int PercentVal2 = 0;
+double AvgVal1 = 0;
+double AvgVal2 = 0;
 infoSens *s;
 
 // Grabs voltage value of the specified file
@@ -61,6 +63,7 @@ void *waterSampler_start(void *SensorNumber)
 
     int percentage = calculatePercentagePollution(SensorNum, buffernum[SensorNum-1]);
 
+    //store percentage values for later access
     if (SensorNum == 1) {
         SensorVal1 = SensorNum;
         PercentVal1 = percentage;
@@ -80,6 +83,13 @@ int calculatePercentagePollution(int SensorNum, int num_array){
         total = waterValues[SensorNum-1][i] + total;
     }
     double average = total / num_array;
+
+    //store average values for later access
+    if (SensorNum == 1) {
+        AvgVal1 = average;
+    } else if (SensorNum == 2) {
+        AvgVal2 = average;
+    }
  
     //do a calculation here to find percentage... %100 = TOTALLY DIRTY, %0 = CLEANEST WATER ON EARTH
     //we are expecting a value from 0 - 3300 around ~
@@ -99,4 +109,6 @@ void displayOnLCD(infoSens *s) {
     s->infoSen2 = SensorVal2;
     s->infoPerc1 = PercentVal1;
     s->infoPerc2 = PercentVal2;
+    s->infoAvg1 = AvgVal1;
+    s->infoAvg2 = AvgVal2;
 }

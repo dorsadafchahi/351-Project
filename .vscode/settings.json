@@ -4,7 +4,9 @@
     "time.h": "c",
     "ledmatrix.h": "c",
     "pthread.h": "c",
-    "stdio.h": "c"
+    "stdio.h": "c",
+    "stdlib.h": "c",
+    "lcd.h": "c"
   },
   "C_Cpp_Runner.cCompilerPath": "gcc",
   "C_Cpp_Runner.cppCompilerPath": "g++",

@@ -21,6 +21,8 @@ typedef struct {
     int infoSen2;
     int infoPerc1;
     int infoPerc2;
+    double infoAvg1;
+    double infoAvg2;
 } infoSens;
 
 // function to get voltage reading from water sensor
