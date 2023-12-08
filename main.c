@@ -1,12 +1,12 @@
-//this is the final project for class ENSC 351
-//  Started Nov 20th 2023
-//  Completed Dec 8th 2023
-//  Nicholas H, Dorsa A, Lester P, Jim P
+// this is the final project for class ENSC 351
+//   Started Nov 20th 2023
+//   Completed Dec 8th 2023
+//   Nicholas H, Dorsa A, Lester P, Jim P
 //
-//  Description: Water pollution detection
-//  Will use 2 turbidity sensors to detect pollution in 2 water samples (ideally before and after a filter), 
-//  and then display that amount on an LED
-//  will use modules, threads and Gpio/I2c access to the beaglebone
+//   Description: Water pollution detection
+//   Will use 2 turbidity sensors to detect pollution in 2 water samples (ideally before and after a filter),
+//   and then display that amount on an LED
+//   will use modules, threads and Gpio/I2c access to the beaglebone
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -17,42 +17,49 @@
 
 pthread_t thread1;
 pthread_t thread2;
+pthread_t initialThread;
 
-int main() {
-
+void *waterPollutionDetection(void *arg)
+{
     infoSens SensorOutput;
     char result[32];
 
-    //Initialize matrix for numbers
-    // runCommand("config-pin P9_18 i2c");
-    // runCommand("config-pin P9_17 i2c");
-    // runCommand("i2cset -y 1 0x70 0x21 0x00");
-    // runCommand("i2cset -y 1 0x70 0x81 0x00");
-    initializeLCD(); //initialize LCD
+    while (1)
+    {
+        int flag = getGPIOvalue(72);
+        // Check GPIO value if 48 then pressed
+        if (flag == 48)
+        {
+            initializeLCD(); // Clear LCD and reset variables
+            writeMessage("Analyzing water");
 
-    // printf("Starting Water Analysis\n");
-    writeMessage("Analyzing water");
+            pthread_create(&thread1, NULL, &waterSampler_start, (void *)1);
+            pthread_create(&thread2, NULL, &waterSampler_start, (void *)2);
 
-    //Run thread 1 to gather data from the first sensor and place it into array
-    pthread_create(&thread1, NULL, &waterSampler_start, (void *)1);
+            pthread_join(thread1, NULL);
+            pthread_join(thread2, NULL);
 
-    // //Run thread 2 to gather data from the second sensor and place it into array
-    pthread_create(&thread2, NULL, &waterSampler_start, (void *)2);
+            initializeLCD(); // Clear LCD
+            displayOnLCD(&SensorOutput);
 
+            snprintf(result, sizeof(result), "Blue:%d  Blk:%d  ", SensorOutput.infoPerc2, SensorOutput.infoPerc1);
+            writeMessage(result);
+        }
+    }
+    return NULL;
+}
 
-    //now both arrays are filled, and need to display percentage of pollution in each %100?
-    //done in the thread functions
+int main()
+{
+    // //initialize the GPIO USER BUTTON
+    GPIO_writeDirection(72, "out");
 
-    pthread_join(thread1, NULL);
-    pthread_join(thread2, NULL);
+    // Create a thread for water pollution detection
+    pthread_create(&initialThread, NULL, &waterPollutionDetection, NULL);
 
-    //Display sensor information on LCD
-    initializeLCD(); //clears LCD
-    displayOnLCD(&SensorOutput);
-    // printf("\n\nSensor %d: %d, Sensor %d: %d\n", SensorOutput.infoSen1, SensorOutput.infoPerc1, SensorOutput.infoSen2, SensorOutput.infoPerc2);
+    // Other main tasks or code...
 
-    snprintf(result, sizeof(result), "Blue:%d  Blk:%d  ", SensorOutput.infoPerc2, SensorOutput.infoPerc1);
-    writeMessage(result);
+    pthread_join(initialThread, NULL);
 
     return 0;
 }

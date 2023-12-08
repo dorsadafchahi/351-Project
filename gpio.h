@@ -12,6 +12,7 @@
 #define D7_GPIO_NUMBER 48
 #define RS_GPIO_NUMBER 68
 #define E_GPIO_NUMBER  67
+#define USER_BUTTON_GPIO_NUMBER 72
 
 // #define D0_DIRECTION "/sys/class/gpio/gpio47/direction"
 // #define D0_VALUE "/sys/class/gpio/gpio47/value"
@@ -43,9 +44,16 @@
 #define E_DIRECTION "/sys/class/gpio/gpio67/direction"
 #define E_VALUE "/sys/class/gpio/gpio67/value"
 
+#define USER_BUTTON_DIRECTION  "/sys/class/gpio/gpio72/direction"
+#define USER_BUTTON_VALUE "/sys/class/gpio/gpio72/value"
+
+
 // Write the provided string "in"/"out" to the given GPIO's direction
 void GPIO_writeDirection(int, char*);
 // Write the provided string "1"/"0" to the given GPIO's value
 void GPIO_writeValue(int, char*);
+
+// Get GPIO value
+int getGPIOvalue(int);
 
 #endif
