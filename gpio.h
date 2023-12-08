@@ -2,12 +2,28 @@
 #define _GPIO_H_
 #include <stdio.h>
 
+// #define D0_GPIO_NUMBER 47
+// #define D1_GPIO_NUMBER 46
+// #define D2_GPIO_NUMBER 23
+// #define D3_GPIO_NUMBER 26
 #define D4_GPIO_NUMBER 66
 #define D5_GPIO_NUMBER 69
 #define D6_GPIO_NUMBER 115
 #define D7_GPIO_NUMBER 48
 #define RS_GPIO_NUMBER 68
 #define E_GPIO_NUMBER  67
+
+// #define D0_DIRECTION "/sys/class/gpio/gpio47/direction"
+// #define D0_VALUE "/sys/class/gpio/gpio47/value"
+
+// #define D1_DIRECTION "/sys/class/gpio/gpio46/direction"
+// #define D1_VALUE "/sys/class/gpio/gpio46/value"
+
+// #define D2_DIRECTION "/sys/class/gpio/gpio23/direction"
+// #define D2_VALUE "/sys/class/gpio/gpio23/value"
+
+// #define D3_DIRECTION "/sys/class/gpio/gpio26/direction"
+// #define D3_VALUE "/sys/class/gpio/gpio26/value"
 
 #define D4_DIRECTION "/sys/class/gpio/gpio66/direction"
 #define D4_VALUE "/sys/class/gpio/gpio66/value"

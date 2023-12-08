@@ -56,7 +56,7 @@ int main() {
     //Display sensor information on LCD
     initializeLCD(); //clears LCD
     displayOnLCD(&SensorOutput);
-    printf("\n\nSensor %d: %d, Sensor %d: %d\n", SensorOutput.infoSen1, SensorOutput.infoPerc1, SensorOutput.infoSen2, SensorOutput.infoPerc2);
+    // printf("\n\nSensor %d: %d, Sensor %d: %d\n", SensorOutput.infoSen1, SensorOutput.infoPerc1, SensorOutput.infoSen2, SensorOutput.infoPerc2);
 
     snprintf(result, sizeof(result), "Blue:%d  Blk:%d  ", SensorOutput.infoPerc2, SensorOutput.infoPerc1);
     writeMessage(result);

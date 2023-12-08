@@ -83,7 +83,12 @@ int calculatePercentagePollution(int SensorNum, int num_array){
  
     //do a calculation here to find percentage... %100 = TOTALLY DIRTY, %0 = CLEANEST WATER ON EARTH
     //we are expecting a value from 0 - 3300 around ~
-    int percentage = (3300 - (int)average) / 100;
+    int percentage = 100 - (int)((average / 3300.0) * 100);
+    if (percentage <= 0) { //if percent is negative value, make 0 instead (due to high avg above our max range)
+        percentage = 0;
+    }
+
+    printf("\n\npercentage: %d, int avg: %d\n", percentage, (int)average);
 
     printf("Calculating percentage (Sensor %d)...\n     Average: %f\n     Sample is %d percent dirty.\n\n", SensorNum, average, percentage);
     return percentage;
@@ -91,7 +96,7 @@ int calculatePercentagePollution(int SensorNum, int num_array){
 
 void displayOnLCD(infoSens *s) {
 
-    printf("\n\nDISPLAY: Sensor %d: %d, Sensor %d: %d\n", SensorVal1, PercentVal1, SensorVal2, PercentVal2); //uncomment for debugging
+    // printf("\n\nDISPLAY: Sensor %d: %d, Sensor %d: %d\n", SensorVal1, PercentVal1, SensorVal2, PercentVal2); //uncomment for debugging
     //store percentage value in respected sensor for LCD
     s->infoSen1 = SensorVal1;
     s->infoSen2 = SensorVal2;
