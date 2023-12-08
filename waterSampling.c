@@ -3,7 +3,7 @@
 //array for water sample values
 double waterValues[2][1000];//dirty = 1, clean = 2
 
-//variables for storing sa
+//variables for storing sensor-percentage values
 int SensorVal1 = 0;
 int SensorVal2 = 0;
 int PercentVal1 = 0;
