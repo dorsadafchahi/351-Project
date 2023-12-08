@@ -18,8 +18,6 @@
 pthread_t thread1;
 pthread_t thread2;
 
-//comment
-
 int main() {
 
     // int SensorVal = 0;
