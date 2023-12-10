@@ -10,7 +10,6 @@
 #include <stdbool.h>
 #include <pthread.h>
 #include "time.h"
-#include "LEDmatrix.h"
 #include "lcd.h"
 
 #define WATERSENSOR1 "/sys/bus/iio/devices/iio:device0/in_voltage5_raw"
@@ -21,6 +20,8 @@ typedef struct {
     int infoSen2;
     int infoPerc1;
     int infoPerc2;
+    double infoAvg1;
+    double infoAvg2;
 } infoSens;
 
 // function to get voltage reading from water sensor

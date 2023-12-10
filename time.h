@@ -1,3 +1,8 @@
+// time.h
+// Module that defines time functions for use in functions that
+// depend on current time/state of beaglebone;
+// eg. adding delay or creating autonomous loops
+
 #ifndef TIME_H
 #define TIME_H
 #include <stdio.h>

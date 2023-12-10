@@ -1,7 +1,12 @@
+// gpio.h
+// Module for defining and initializing GPIO pins for LCD
+// Referenced from Brian Fraser's 16x2 LCD How-To Guide
+
 #ifndef _GPIO_H_
 #define _GPIO_H_
 #include <stdio.h>
 
+// Comments for use with 8-bit operational mode on LCD
 // #define D0_GPIO_NUMBER 47
 // #define D1_GPIO_NUMBER 46
 // #define D2_GPIO_NUMBER 23
@@ -45,6 +50,7 @@
 
 // Write the provided string "in"/"out" to the given GPIO's direction
 void GPIO_writeDirection(int, char*);
+
 // Write the provided string "1"/"0" to the given GPIO's value
 void GPIO_writeValue(int, char*);
 
