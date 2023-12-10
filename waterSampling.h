@@ -10,7 +10,6 @@
 #include <stdbool.h>
 #include <pthread.h>
 #include "time.h"
-#include "LEDmatrix.h"
 #include "lcd.h"
 
 #define WATERSENSOR1 "/sys/bus/iio/devices/iio:device0/in_voltage5_raw"

@@ -24,17 +24,12 @@ int main() {
 
     infoSens SensorOutput;
 
-    //Initialize matrix for numbers
-    // runCommand("config-pin P9_18 i2c");
-    // runCommand("config-pin P9_17 i2c");
-    // runCommand("i2cset -y 1 0x70 0x21 0x00");
-    // runCommand("i2cset -y 1 0x70 0x81 0x00");
     runCommand("config-pin p8.43 gpio"); //initialize the GPIO USER BUTTON
     initializeLCD(); //initialize (clear) LCD
     
     writetoFile("in");
     long long starttime = getTimeInMs();
-    while(getTimeInMs() < (starttime + (1000 * 60 * 3))) { //this loop will run until 3 min of inactivity
+    while(getTimeInMs() < (starttime + (1000 * 60 * 5))) { //this loop will run until 3 min of inactivity
         if (getUSERvalue() == 48){//button is pressed
              // printf("Starting Water Analysis\n");
             initializeLCD();
@@ -61,7 +56,7 @@ int main() {
                     initializeLCD();
                     break;
                 }
-                if (getTimeInMs() > (starttime + (1000 * 60 * 3))) {
+                if (getTimeInMs() > (starttime + (1000 * 60 * 5))) { //5 minute inactivity timer
                     goto END;
                 }
             }

@@ -1,3 +1,7 @@
+// button.h
+// Module defines button functionality
+// Mainly used to detect if USER pressed, then re-scan current samples
+
 #ifndef BUTTON_H
 #define BUTTON_H
 
